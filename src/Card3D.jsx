@@ -2,7 +2,7 @@
 import * as THREE from 'three'
 import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useFrame} from '@react-three/fiber'
-import {Html, Float, Sparkles, useTexture, useVideoTexture, Text} from '@react-three/drei'
+import {Html, Float, Sparkles, useTexture, useVideoTexture, Text, Svg} from '@react-three/drei'
 import {a, useSpring, easings} from '@react-spring/three'
 import {asset} from './util'
 
@@ -41,7 +41,7 @@ export default function Card3D() {
     if (!textRef.current) return
     textRef.current.color = `hsl(${hue * 360} 80% 60%)`
     textRef.current.outlineColor = `hsl(${hue2 * 360} 90% 65%)`
-    textRef.current.outlineWidth = 0.025 + 0.01 * Math.sin(t * 2) // subtle pulse
+    textRef.current.outlineWidth = 0.015 + 0.005 * Math.sin(t * 2) // subtle pulse
   })
 
   const [hovered, setHovered] = useState(false)
@@ -155,7 +155,6 @@ export default function Card3D() {
       } else {
         play(closeSfx)
         stop(shimmeringSfx)
-
       }
       return next
     })
@@ -170,9 +169,9 @@ export default function Card3D() {
       {/* Stationary hover target prevents pointerleave while cover swings */}
       <mesh
         position={[0, 0, HINGE_Z + 0.02]}
-        onPointerEnter={handleCardOpen}
-        onPointerLeave={handleCardClose}
-        onPointerDown={handleMobileTouch} // mobile toggle
+        // onPointerEnter={handleCardOpen}
+        // onPointerLeave={handleCardClose}
+        onClick={handleMobileTouch} // mobile toggle
       >
         <planeGeometry args={[CARD_W * 1.15, CARD_H * 1.15]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
@@ -182,12 +181,10 @@ export default function Card3D() {
 
 
         {/* Inside content group — only show when slightly open */}
-        {/* <a.group visible={open.to((o) => o > 0.2)}> */}
         <a.group >
-          {/* Right interior paper plane */}
           <mesh>
             <planeGeometry args={[CARD_W, CARD_H]} />
-            <meshStandardMaterial color="#fffdf7" side={THREE.DoubleSide} />
+            <meshNormalMaterial  side={THREE.DoubleSide} />
           </mesh>
 
 
@@ -197,16 +194,14 @@ export default function Card3D() {
             anchorX="center" anchorY="middle"
             fontSize={0.25}
             font='/fonts/' {...fontProps}
-            outlineWidth={0.005}
-            outlineBlur={0.025}
+            outlineWidth={0.025}
+            outlineBlur={0.015}
             outlineOpacity={0.25}
             maxWidth={CARD_W * 0.8}
           >
             <meshStandardMaterial
-              color="#ffffff"
+              color="#fafafa"
               emissive="#ff66aa"            // glow color
-              emissiveIntensity={1.2}
-              toneMapped={false}            // keep it punchy for bloom
             />
             {'Of all the flowers \n I could ever pick, \n my favourite will always be you \n  \n - now give me a call ya’ bitch.'}
           </Text>
@@ -216,6 +211,14 @@ export default function Card3D() {
         {/* Front cover (image) — hinge on left edge */}
         <a.group position={[-CARD_W / 2, 0, HINGE_Z]} rotation-y={coverRotation} zIndexRange={[1, 0]}>
           <group position={[CARD_W / 2, 0, 0]}>
+            {/* <Svg position={[- CARD_W / 2, 1.0, 0.05]} src={asset('heart.svg')} scale={[0.08, 0.1, 0.5]} strokeMaterial={
+              <lineBasicMaterial
+                color="#ffffff"
+                emissive="#ff66aa"            // glow color
+                emissiveIntensity={1.2}
+              />
+            }></Svg> */}
+
             <mesh>
               <planeGeometry args={[CARD_W, CARD_H]} />
               <meshBasicMaterial map={coverTex} toneMapped={false} side={THREE.FrontSide} />
