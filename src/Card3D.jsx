@@ -12,11 +12,11 @@ const HINGE_Z = 0.001   // tiny thickness illusion
 const BORDER = 0.96
 
 export default function Card3D() {
-  const coverTex = useTexture(asset('/img.jpg'))
+  const coverTex = useTexture(asset('img.jpg'))
   coverTex.colorSpace = THREE.SRGBColorSpace
   coverTex.anisotropy = 8
 
-  const vidTex = useVideoTexture(asset('/floral.mp4'), {
+  const vidTex = useVideoTexture(asset('floral.mp4'), {
     start: true, loop: true, muted: true, crossOrigin: 'anonymous'
   })
 
@@ -70,10 +70,10 @@ export default function Card3D() {
   const shimmeringSfx = React.useRef(null)
 
   React.useEffect(() => {
-    openSfx.current = new Audio('/sfx/greeting-card-open.mp3')
-    closeSfx.current = new Audio('/sfx/greeting-card-close.mp3')
-    partyHornSfx.current = new Audio('/sfx/party-horn.mp3')
-    shimmeringSfx.current = new Audio('/sfx/shimmering.mp3')
+    openSfx.current = new Audio(asset('sfx/greeting-card-open.mp3'))
+    closeSfx.current = new Audio(asset('sfx/greeting-card-close.mp3'))
+    partyHornSfx.current = new Audio(asset('sfx/party-horn.mp3'))
+    shimmeringSfx.current = new Audio(asset('sfx/shimmering.mp3'))
     openSfx.current.preload = 'auto'
     closeSfx.current.preload = 'auto'
     partyHornSfx.current.preload = 'auto'
@@ -161,7 +161,7 @@ export default function Card3D() {
     })
   }
 
-  const fontProps = {font: asset('/fonts/DancingScript-Regular.woff'), fontSize: 0.15, letterSpacing: -0.0025, lineHeight: 1.5, 'material-toneMapped': false}
+  const fontProps = {font: asset('fonts/DancingScript-Regular.woff'), fontSize: 0.15, letterSpacing: -0.0025, lineHeight: 1.5, 'material-toneMapped': false}
 
 
 
