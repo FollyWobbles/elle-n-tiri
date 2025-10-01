@@ -1,0 +1,37 @@
+/* src/styles.css */
+html,
+body,
+#root {
+	height: 100%;
+	margin: 0;
+}
+.canvas-wrap {
+	height: 100%;
+	width: 100%;
+	background: radial-gradient(#f7f7ff, #e7e7f7);
+}
+.ui-overlay {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	display: grid;
+	place-items: end center;
+	padding: 12px;
+	font-family: system-ui, sans-serif;
+	color: #444;
+
+}
+
+/* styles.css */
+.card-html {
+  user-select: none;
+  pointer-events: none; /* so it doesn't steal hover from the 3D card */
+  transform: translateZ(0); /* crisp */
+}
+
+.card-video {
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+}
+
