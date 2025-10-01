@@ -4,6 +4,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useFrame} from '@react-three/fiber'
 import {Html, Float, Sparkles, useTexture, useVideoTexture, Text} from '@react-three/drei'
 import {a, useSpring, easings} from '@react-spring/three'
+import {asset} from './util'
 
 const CARD_W = 2.2
 const CARD_H = 3.0
@@ -11,11 +12,11 @@ const HINGE_Z = 0.001   // tiny thickness illusion
 const BORDER = 0.96
 
 export default function Card3D() {
-  const coverTex = useTexture('/img.jpg')
+  const coverTex = useTexture(asset('/img.jpg'))
   coverTex.colorSpace = THREE.SRGBColorSpace
   coverTex.anisotropy = 8
 
-  const vidTex = useVideoTexture('/floral.mp4', {
+  const vidTex = useVideoTexture(asset('/floral.mp4'), {
     start: true, loop: true, muted: true, crossOrigin: 'anonymous'
   })
 
@@ -160,7 +161,7 @@ export default function Card3D() {
     })
   }
 
-  const fontProps = {font: '/fonts/DancingScript-Regular.woff', fontSize: 0.15, letterSpacing: -0.0025, lineHeight: 1.5, 'material-toneMapped': false}
+  const fontProps = {font: asset('/fonts/DancingScript-Regular.woff'), fontSize: 0.15, letterSpacing: -0.0025, lineHeight: 1.5, 'material-toneMapped': false}
 
 
 
